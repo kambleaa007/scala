@@ -407,19 +407,209 @@ object MyScalaApp extends App {
     }
     
   }
-  try26
+  //try26
   
-  def try27{}
+/*
+ * Functions 
+ * 
+
+  def fun(x:Int)= if (x==10) 5 else 10
+
+  var x=fun(10)
+  println(x)
+  def fun="welcome"
+  println(fun)
+  def fun(x:Int,y:Float):Float={
+  x+y
+  }
+  println(fun(10,20f))
+  def fun(x:Float){
+  println(x)
+  }
+  fun(200.78f)
   
-  def try28{}
+  def fun(x:Float,y:Int):Float={
+  x+y
+  }
+  println(fun(20.5f,20))
+
+// Functions with named arguments
+ 
+  println(fun(y=100,x=20))
+
+// Functions with variable arguments
+
+def fun(x:String*):Unit={
+    1
+    for(s<-x){
+      println(s)
+    }      
+  }
   
-  def try29{}
+  fun("a")
+  fun("a","b","c")
+
+// Functions with default arguments
+	def fun(x:String="sajal", y:String,z:Int=6){
+    println(x+y+z)
+  }
+  fun(y="no defalut")
+
+// function call by name mechanism passing the entire block of code to a function  
+	def fun():Int={
+  println("hello")
+  100
+  }
+  def fun1(t: => Int)={
+  println("In fun1 method")
+  println("the value is:"+t)
+  }
+  fun1(fun)
+
+
+*/
+
   
-  def try30{}
+ 
+  // Functional programming
+  // extract out computational part into a function
+  // Pure function->immutable->thread safe
   
-  def try31{}
+  def try27{
+    
+      var arr:Array[String]=Array("sajal","deb","Raju");
+      var len=(x:String) => x.length()
+      def calculatelength(calculate:(String)=>Int,x:Array[String]){
+        for(name <- x){
+          println(calculate(name))
+        }
+      }
+      calculatelength(len,arr);
+    
+  }
+  //try27
   
-  def try32{}
+  def try28{
+    
+    var list:List[Int]=List(100,200,134,152,89,567)
+    var evenCondition=(x:Int)=> x%2==0
+    var printdate=(x:Int) => println(x)
+    list.filter(evenCondition)
+    .map((x)=>x*2)
+    .foreach(printdate)
+    
+    
+    list.filter(_%2==0)
+    .map(_*2)
+    .foreach(printdate)
+    
+    
+  }
+  //try28
+  
+  // WRONG WAY QUE IS ON STACKOVERFLOW FOR ANSWERS
+  def try29{
+    
+    // Creating Partial function  
+    // using two methods 
+    val r = new PartialFunction[Int, Int]  
+    { 
+
+        // Applying isDefinedAt method  
+        def isDefinedAt(q: Int) = q != 0
+
+        // Applying apply method 
+        def apply(q: Int) = 12 * q 
+
+    }
+    
+    val rr = new PartialFunction[Double, Double]  
+    { 
+
+        // Applying isDefinedAt method  
+        def isDefinedAt(q: Double) = q < 0
+
+        // Applying apply method 
+        def apply(q: Double) = 12 * q 
+
+    }
+
+    // Displays output if the 
+    // condition is satisfied 
+    println(r(0))
+    println(r(2))
+    
+    println(rr(-1))
+    println(rr(-2))
+    
+  }
+  //try29
+  
+  // Partial functions case implementation with chaining
+  def try30{
+    
+    var x:List[Int]=List(0,1,2,3,4,5,6,7)
+  
+    val isEven: PartialFunction[Int, String] = {
+        case x if x % 2 == 0 => x+" is even"
+    }
+      val isOdd: PartialFunction[Int, String] = {
+        case x if x % 2 == 1 => x+" is odd"
+    }
+
+    // the method collect can use isDefinedAt to select which members to collect
+    //val evenNumbers =x.collect(isEven)
+    
+    val numbers = x.map(isEven orElse(isOdd)) // chaining
+    
+    for(n<- numbers){
+        println(n)
+    }
+    
+  }
+  //try30
+  
+  
+  def try31{
+    
+    var f=new PartialFunction[Int,Int]{
+      def apply(x:Int)= x*2
+      def isDefinedAt(x:Int) =x>0
+    }
+      val x=f.lift // Option (Some , None)
+      println(x(-1))  
+    
+  }
+  
+  def try32{
+    
+    def totalPrice(v:Int, sr:Int,pp:Int):Int = pp +pp*sr/100 + pp*v/100
+  
+     def totalPriceCurried(v:Int)(sr:Int)(pp:Int):Int=
+        pp +pp*sr/100 + pp*v/100
+    
+      val vatApplied = totalPriceCurried(20)_
+      val srApplied=vatApplied(20)
+      val totalprice1=srApplied(400)
+      
+      println(totalprice1)
+      
+      println(totalPrice(20,20,400))
+    
+  }
+  
+  def try33{}
+  
+  def try34{}
+  
+  def try35{}
+  
+  def try36{}
+  
+  def try37{}
+  
+  def try38{}
+  
   
 }
 
