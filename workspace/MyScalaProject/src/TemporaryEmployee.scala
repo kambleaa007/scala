@@ -1,0 +1,5 @@
+
+
+class TemporaryEmployee extends Employee {
+  
+}

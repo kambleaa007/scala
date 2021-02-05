@@ -1,0 +1,5 @@
+
+
+class PermanentEmployee extends Employee {
+  
+}
